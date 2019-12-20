@@ -8,6 +8,8 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.webdemo.bridge.BridgeActivity;
+import com.example.webdemo.jsinterface.JsInterfaceActivity;
 import com.example.webdemo.keyboard.KeyboardActivity;
 import com.example.webdemo.utils.SpUtil;
 
@@ -18,6 +20,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mFruitSdcard;
     private EditText mEtIp;
     private Button mFruitLoadByDefine;
+    private Button mBtnTestJs;
+    private Button mBtnTestBridge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +35,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mFruitSdcard = findViewById(R.id.btn_load_from_sdcard);
         mEtIp = findViewById(R.id.et_load_define_ip);
         mFruitLoadByDefine = findViewById(R.id.btn_load_define);
+        mBtnTestJs = findViewById(R.id.btn_test_js_interface);
+        mBtnTestBridge = findViewById(R.id.btn_test_bridge);
 
         mFruitNet.setOnClickListener(this);
         mFruitAssets.setOnClickListener(this);
         mFruitSdcard.setOnClickListener(this);
         mFruitLoadByDefine.setOnClickListener(this);
         mEtIp.setOnClickListener(this);
+        mBtnTestJs.setOnClickListener(this);
+        mBtnTestBridge.setOnClickListener(this);
 
     }
 
@@ -66,6 +74,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.et_load_define_ip:
                 Intent intent = new Intent(MainActivity.this, KeyboardActivity.class);
                 startActivity(intent);
+                return;
+            case R.id.btn_test_js_interface:
+                Intent jsIntent = new Intent(MainActivity.this, JsInterfaceActivity.class);
+                startActivity(jsIntent);
+                return;
+            case R.id.btn_test_bridge:
+                Intent bridgeIntent = new Intent(MainActivity.this, BridgeActivity.class);
+                startActivity(bridgeIntent);
                 return;
             default:
                 break;

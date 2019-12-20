@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".AppInit"
@@ -32,6 +33,14 @@
 
         <activity
             android:name="com.example.webdemo.keyboard.KeyboardActivity"
+            android:screenOrientation="landscape" />
+
+        <activity
+            android:name=".jsinterface.JsInterfaceActivity"
+            android:screenOrientation="landscape" />
+
+        <activity
+            android:name=".bridge.BridgeActivity"
             android:screenOrientation="landscape" />
     </application>
 
