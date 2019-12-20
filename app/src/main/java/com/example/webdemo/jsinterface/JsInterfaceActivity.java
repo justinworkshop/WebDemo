@@ -11,7 +11,6 @@ import android.webkit.ValueCallback;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.EditText;
 
 import com.example.webdemo.R;
 
@@ -22,8 +21,8 @@ import com.example.webdemo.R;
  * Date: 2019/12/20 17:43
  * Description: JsInterfaceActivity
  */
-public class JsInterfaceActivity extends AppCompatActivity {
-    private EditText mEtInput;
+public class JsInterfaceActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "JsInterfaceActivity";
     private Button mBtnCallJs;
     private WebView mWebView;
 
@@ -33,9 +32,9 @@ public class JsInterfaceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jsinterface);
 
-        mEtInput = findViewById(R.id.et_input);
         mBtnCallJs = findViewById(R.id.btn_call_js);
         mWebView = findViewById(R.id.web_view);
+        mBtnCallJs.setOnClickListener(this);
 
         WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
@@ -44,31 +43,27 @@ public class JsInterfaceActivity extends AppCompatActivity {
         mWebView.addJavascriptInterface(new WebViewUtils(mWebView), "androidInterface");
         mWebView.loadUrl("file:///android_asset/test.html");
 
-        mBtnCallJs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                Log.d("PET", "click");
-                mWebView.evaluateJavascript("goBack()", new ValueCallback<String>() {
-                    @Override
-                    public void onReceiveValue(String value) {
-                        Log.d("PET", "onReceiveValue " + value);
-                    }
-                });
-            }
-        });
 
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
-    public void onBackPressed() {
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_call_js:
+                handleGoBack();
+                break;
+            default:
+                break;
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void handleGoBack() {
         mWebView.evaluateJavascript("goBack()", new ValueCallback<String>() {
             @Override
             public void onReceiveValue(String value) {
-                Log.d("PET", "goBack() return " + value);
-                if (value.equals("0")) {
-                    finish();
-                }
+                Log.d(TAG, "onReceiveValue: " + value);
             }
         });
     }

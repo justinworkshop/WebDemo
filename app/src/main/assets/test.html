@@ -1,66 +1,16 @@
 <!DOCTYPE html>
 <html>
 
-<head lang="zh-cmn-Hans">
-    <meta charset="UTF-8">
-    <title>DSBridge Test</title>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=0.5,user-scalable=no" />
-    <style>
-        .btn {
-            text-align: center;
-            background: #eee;
-            color: #000;
-            padding: 20px;
-            margin: 30px;
-            font-size: 24px;
-            border-radius: 4px;
-            box-shadow: 4px 2px 10px #999;
-        }
-
-        .btn:active {
-            opacity: .7;
-            box-shadow: 4px 2px 10px #555;
-        }
-    </style>
-</head>
-
 <body>
     <div id="web_test"></div>
 
-    <div class="btn" onclick="goBack()">goBack</div>
-    <div class="btn" onclick="getPet()">getPet</div>
-    <div class="btn" onclick="setPet()">setPet</div>
-    <div class="btn" onclick="getUserScore()">getUserScore</div>
-    <div class="btn" onclick="setUserScore()">setUserScore</div>
+    <button type="button" onclick="getUserScore()">getUserScore</button>
+    <button type="button" onclick="setUserScore()">setUserScore</button>
 
     <script>
 
-        // 接收native消息
-        window.handleMessageFromNative = function(msg, params) {
-            alert('[handleMessageFromNative] msg:' + msg + ' params:' + params);
-        }
-
         function goBack() {
-            androidInterface.goBack();
-            document.getElementById("web_test").innerHTML= "goBack";
             return "1";
-        }
-
-        function getPet() {
-            var ret = androidInterface.getPet();
-            document.getElementById("web_test").innerHTML= "getPet:"+ret;
-        }
-
-        function setPet() {
-            var pet = {
-                version: '1.0.0',
-                hungry: 60,
-                clothId: '1000',
-                buyedClothes: ['1000'],
-            };
-            androidInterface.setPet(JSON.stringify(pet));
         }
 
         function getUserScore() {

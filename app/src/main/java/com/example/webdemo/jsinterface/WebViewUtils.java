@@ -12,6 +12,7 @@ import android.webkit.WebView;
  * Description: WebViewUtils
  */
 public class WebViewUtils {
+    private static final String TAG = "WebViewUtils";
     private WebView webView;
 
     public WebViewUtils(WebView webView) {
@@ -24,22 +25,12 @@ public class WebViewUtils {
     }
 
     @JavascriptInterface
-    public String getPet() {
-        return "From  native pet";
-    }
-
-    @JavascriptInterface
-    public void setPet(String pet) {
-        Log.d("PET", "From js pet:" + pet);
-    }
-
-    @JavascriptInterface
     public int getUserScore() {
         return 200;
     }
 
     @JavascriptInterface
     public void setUserScore(int score) {
-        Log.d("PET", "From js score:" + score);
+        Log.d(TAG, "Score from web:" + score);
     }
 }
