@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="75px"
+    android:layout_height="50px">
+
+    <TextView
+        android:id="@+id/tv_keyboard_item"
+        android:layout_width="66px"
+        android:layout_height="45px"
+        android:layout_gravity="center"
+        android:background="@drawable/selector_key_board_item"
+        android:gravity="center"
+        android:textColor="@color/bg_black"
+        android:textSize="18px" />
+
+</FrameLayout>

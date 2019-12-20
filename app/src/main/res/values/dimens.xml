@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_left_12">12px</dimen>
+    <dimen name="margin_top_10">10px</dimen>
+    <dimen name="screen_width_308">308px</dimen>
+</resources>

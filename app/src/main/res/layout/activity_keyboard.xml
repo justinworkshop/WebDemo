@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/screen_width_308"
+    android:layout_height="240px"
+    android:background="@drawable/menu_bg">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="65px">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_left_12"
+            android:layout_marginTop="@dimen/margin_top_10"
+            android:src="@drawable/chess_game_back_selector" />
+
+        <TextView
+            android:id="@+id/tv_wifi_name"
+            android:layout_width="190px"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="18px"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:textSize="28px"
+            android:textStyle="bold" />
+
+        <com.example.webviewdemo.keyboard.BaseEditText
+            android:id="@+id/et_password"
+            android:layout_width="163px"
+            android:layout_height="38px"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="67px"
+            android:background="@drawable/btn_wifi_enter_password_small"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:gravity="center_vertical"
+            android:longClickable="false"
+            android:paddingLeft="10px"
+            android:paddingTop="5px"
+            android:paddingRight="28px"
+            android:paddingBottom="5px"
+            android:textCursorDrawable="@drawable/my_cursor" />
+
+        <TextView
+            android:id="@+id/btn_connect"
+            android:layout_width="61px"
+            android:layout_height="38px"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="12px"
+            android:background="@drawable/btn_wifi_connect"
+            android:gravity="center"
+            android:paddingTop="5px"
+            android:text="确认"
+            android:textColor="@color/bg_black"
+            android:textSize="20px"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/iv_delete"
+            android:layout_width="40px"
+            android:layout_height="40px"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="80px"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_keyboard_chacha" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_keyboard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="65px"
+        android:background="@color/keyboard_gray">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5px"
+            app:cardBackgroundColor="@color/keyboard_gray"
+            app:cardCornerRadius="10px"
+            app:cardElevation="3px">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rcv_keyboard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="63px"
+                android:layout_marginTop="3px"
+                android:layout_marginRight="25px" />
+
+            <LinearLayout
+                android:layout_width="58px"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/btn_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_keyboard_function_top"
+                    android:gravity="center"
+                    android:text="123"
+                    android:textColor="@color/bg_black"
+                    android:textSize="18px" />
+
+                <TextView
+                    android:id="@+id/btn_big"
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_keyboard_function_mid"
+                    android:gravity="center"
+                    android:text="ABC"
+                    android:textColor="@color/bg_black"
+                    android:textSize="18px" />
+
+                <TextView
+                    android:id="@+id/btn_small"
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_keyboard_function_mid"
+                    android:gravity="center"
+                    android:text="abc"
+                    android:textColor="@color/bg_black"
+                    android:textSize="18px" />
+
+                <TextView
+                    android:id="@+id/btn_mark"
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_keyboard_function_bottom"
+                    android:gravity="center"
+                    android:text="符号"
+                    android:textColor="@color/bg_black"
+                    android:textSize="18px" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_slide_bg"
+                android:layout_width="12px"
+                android:layout_height="144px"
+                android:layout_gravity="right"
+                android:layout_marginTop="7px"
+                android:layout_marginRight="5px"
+                android:src="@drawable/bg_keyboard_scrollbar" />
+
+            <ImageView
+                android:id="@+id/iv_slide_btn"
+                android:layout_width="8px"
+                android:layout_height="64px"
+                android:layout_gravity="right"
+                android:layout_marginTop="9px"
+                android:layout_marginRight="6.5px"
+                android:src="@drawable/icon_slide_btn" />
+
+        </android.support.v7.widget.CardView>
+
+    </FrameLayout>
+
+</FrameLayout>

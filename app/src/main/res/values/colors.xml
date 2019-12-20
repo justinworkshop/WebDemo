@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="main_content_brown">#4E2500</color>
+    <color name="bg_black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="keyboard_gray">#FFD4D5DA</color>
+    <color name="keyboard_dark_gray">#babcc2</color>
+</resources>
