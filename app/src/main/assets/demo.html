@@ -1,146 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <link rel="stylesheet" href="./materialize.min.css">
-    <script src="./materialize.min.js"></script>
-    <title>Test</title>
-</head>
 <body>
-<div class="input-field col s6">
-    <input placeholder="Please input data" id="text1" type="text" class="validate">
-</div>
-<a class="waves-effect waves-light btn" onclick="testClick();">button</a>
-<div id="hello_web">
 
-</div>
-</body>
-<script>
+    <div id="show"></div>
 
-         //js调用Android方法：接收Android传递过来的数据，并做处理
+    <button type="button" onclick="callNativeMethod()">callNativeMethod</button>
 
-         function testClick() {
+    <script>
 
-          //参数一：调用java中的方法   submitFromWeb是方法名，必须和Android中注册时候的方法名称保持一致
-          //参数二：返回给Android端的数据，可以为字符串，json等信息
-          //参数三：js接收到Android传递过来的数据之后的相应处理逻辑
+        <!-- js调用Java方法 -->
 
-            window.WebViewJavascriptBridge.callHandler(
-               'submitFromWeb'
-               , {'param': "JS收到数据"}
-               , function(responseData) {
-                    alert(responseData)
-               }
+        function callNativeMethod() {
+
+           <!-- 参数1 java中注册的handleName, 参数2 返回给Java的数据, 参数3 js 的处理逻辑 -->
+
+           WebViewJavascriptBridge.callHandler(
+                'submitFromWeb'
+                , {'param': "I'm js data"}
+                , function(responseData) {
+                    document.getElementById("show").innerHTML = "get responseData from java, data = " + responseData;
+                }
            );
-         }
 
-       // JS注册事件监听
+        }
+
+
+       <!-- Java调用js方法 -->
+
        function connectWebViewJavascriptBridge(callback) {
-           if (window.WebViewJavascriptBridge) {
-               callback(WebViewJavascriptBridge)
-           } else {
-               document.addEventListener(
-                   'WebViewJavascriptBridgeReady'
-                   , function() {
-                       callback(WebViewJavascriptBridge)
-                   },
-                   false
-               );
-           }
+            if (window.WebViewJavascriptBridge) {
+                callback(WebViewJavascriptBridge)
+            } else {
+                document.addEventListener(
+                    'WebViewJavascriptBridgeReady'
+                    , function() {
+                        callback(WebViewJavascriptBridge)
+                    },
+                    false
+                );
+            }
        }
 
-        //注册回调函数，第一次连接时调用 初始化函数
        connectWebViewJavascriptBridge(function(bridge) {
+            bridge.init(function(message, responseCallback) {
+                console.log('JS got a message', message);
+                var data = {
+                    'Javascript Responds': '测试中文!'
+                };
 
-           // 初始化
-           bridge.init(function(message, responseCallback) {
-               var data = {
-                   'Javascript Responds': 'Wee!'
-               };
-               alert("init");
-               responseCallback(data);
-           });
+                if (responseCallback) {
+                    console.log('JS responding with', data);
+                    responseCallback(data);
+                }
+            });
 
-           // Android调用js方法：functionInJs方法名称需要保持一致 ，并返回给Android通知
-           bridge.registerHandler("functionInJs", function(data, responseCallback) {
-               alert(data);
-               var data2 = document.getElementById("text1").value;
-               var responseData = "我是Android调用js方法返回的数据"+ data2;
-               responseCallback(responseData);
-           });
-
-           bridge.registerHandler("goBack", function(data, responseCallback) {
-               var data2 = document.getElementById("text1").value;
-               var responseData = "我是Android调用js方法返回的数据"+ data2;
-               responseCallback(responseData);
-           });
+            bridge.registerHandler("functionInJs", function(data, responseCallback) {
+                document.getElementById("show").innerHTML = ("data from Java: = " + data);
+                if (responseCallback) {
+                    var responseData = "Javascript Says Right back aka!";
+                    responseCallback(responseData);
+                }
+            });
        })
 
-
-        ////////////////////////////////////////
-
-        function showToast(toast) {
-            var money=toast*3;
-            javascript:obj.showToast(money);
-        }
-
-        function funFromjs(){
-        document.getElementById("hello_web").innerHTML="div显示数据,无参数";
-        }
-
-        function funJs(msg){
-            document.getElementById("hello_web").innerHTML=msg;
-         }
-
-        function sum(i,m){
-           var result = i*m;
-           document.getElementById("h").innerHTML= "Android调用JS方法且有返回值--计算结果="+result;
-           javascript:obj.onSum(result)
-        }
-
-        function sumn(i,m){
-           var result = i*m;
-           document.getElementById("hh").innerHTML= "Android调用JS方法且有返回值--计算结果="+result;
-           return result;
-        }
-
-                // 接收native消息
-        window.handleMessageFromNative = function(msg, params) {
-            alert('[handleMessageFromNative] msg:' + msg + ' params:' + params);
-        }
-
-        function goBack() {
-            androidInterface.goBack();
-        }
-
-        function getPet() {
-            var ret = androidInterface.getPet();
-            alert(ret);
-        }
-
-        function setPet() {
-            var pet = {
-                version: '1.0.0',
-                hungry: 60,
-                clothId: '1000',
-                buyedClothes: ['1000'],
-            };
-            androidInterface.setPet(JSON.stringify(pet));
-            alert('setPet finished');
-        }
-
-        function getUserScore() {
-            var ret = androidInterface.getUserScore();
-            alert('user score: ' + ret);
-        }
-
-        function setUserScore() {
-            androidInterface.setUserScore(45);
-            alert('setUserScore finished');
-        }
-
-</script>
+    </script>
+</body>
 </html>

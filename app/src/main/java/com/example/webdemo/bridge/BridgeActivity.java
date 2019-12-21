@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.widget.Button;
-import android.widget.EditText;
 
 import com.example.webdemo.R;
 import com.github.lzyzsd.jsbridge.BridgeHandler;
@@ -22,9 +21,9 @@ import com.github.lzyzsd.jsbridge.DefaultHandler;
  * Date: 2019/12/20 15:23
  * Description: BridgeActivity
  */
-public class BridgeActivity extends AppCompatActivity {
-    private static final String TAG = "BridgeActivityLog";
-    private EditText mEtInput;
+public class BridgeActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "BridgeActivityTag";
+
     private Button mBtnCallJS;
     private BridgeWebView mBridgeWebView;
 
@@ -33,33 +32,39 @@ public class BridgeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bridge);
 
-        mEtInput = findViewById(R.id.et_input);
         mBtnCallJS = findViewById(R.id.btn_call_js);
+        mBtnCallJS.setOnClickListener(this);
         mBridgeWebView = findViewById(R.id.bridge_web_view);
 
-        mBridgeWebView.setDefaultHandler(new DefaultHandler());
         mBridgeWebView.setWebChromeClient(new WebChromeClient());
         mBridgeWebView.loadUrl("file:///android_asset/demo.html");
 
         mBridgeWebView.registerHandler("submitFromWeb", new BridgeHandler() {
             @Override
             public void handler(String data, CallBackFunction function) {
-                Log.d(TAG, "js 调用 Native, 从js返回数据:"+data);
-
-                function.onCallBack("JS调用Android的返回数据:" + mEtInput.getText().toString());
+                Log.d(TAG, "handler = submitFromWeb, data from web = " + data);
+                function.onCallBack("submitFromWeb exe, response data from Java");
             }
         });
 
-        mBtnCallJS.setOnClickListener(new View.OnClickListener() {
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_call_js:
+                callJsMethod();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void callJsMethod() {
+        mBridgeWebView.callHandler("functionInJs", "我是Java数据", new CallBackFunction() {
             @Override
-            public void onClick(View v) {
-                Log.d(TAG, "Native 调用 js");
-                mBridgeWebView.callHandler("goBack", "Android调用js方法", new CallBackFunction() {
-                    @Override
-                    public void onCallBack(String data) {
-                        Log.d(TAG, "onCallBack:" + data);
-                    }
-                });
+            public void onCallBack(String data) {
+                Log.d(TAG, "onCallBack:" + data);
             }
         });
     }
