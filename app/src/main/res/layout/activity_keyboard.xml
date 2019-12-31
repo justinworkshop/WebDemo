@@ -30,7 +30,7 @@
             android:textSize="28px"
             android:textStyle="bold" />
 
-        <com.example.webviewdemo.keyboard.BaseEditText
+        <com.example.webdemo.keyboard.BaseEditText
             android:id="@+id/et_password"
             android:layout_width="163px"
             android:layout_height="38px"

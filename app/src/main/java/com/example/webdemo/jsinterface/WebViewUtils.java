@@ -1,8 +1,9 @@
 package com.example.webdemo.jsinterface;
 
+import android.app.Activity;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
-import android.webkit.WebView;
+import android.widget.Toast;
 
 /**
  * Copyright (C), 2016-2020
@@ -13,15 +14,16 @@ import android.webkit.WebView;
  */
 public class WebViewUtils {
     private static final String TAG = "WebViewUtils";
-    private WebView webView;
+    private Activity activity;
 
-    public WebViewUtils(WebView webView) {
-        this.webView = webView;
+    public WebViewUtils(Activity activity) {
+        this.activity = activity;
     }
 
     @JavascriptInterface
-    public int goBack() {
-        return 1;
+    public void goBack() {
+        activity.finish();
+        Toast.makeText(activity.getApplicationContext(), "GoBack", Toast.LENGTH_LONG).show();
     }
 
     @JavascriptInterface

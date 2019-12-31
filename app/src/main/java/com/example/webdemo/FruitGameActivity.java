@@ -11,6 +11,8 @@ import android.view.Window;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.example.webdemo.jsinterface.WebViewUtils;
+
 /**
  * Copyright (C), 2016-2020
  * FileName: FruitGameActivity
@@ -40,6 +42,7 @@ public class FruitGameActivity extends AppCompatActivity {
         mWebView.getSettings().setMediaPlaybackRequiresUserGesture(false);
         mWebView.getSettings().setUseWideViewPort(true);
         mWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        mWebView.addJavascriptInterface(new WebViewUtils(this), "androidInterface");
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -67,6 +70,11 @@ public class FruitGameActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         mEnd = System.currentTimeMillis();
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
     }
 
     @Override

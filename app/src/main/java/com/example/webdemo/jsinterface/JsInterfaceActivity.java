@@ -40,7 +40,7 @@ public class JsInterfaceActivity extends AppCompatActivity implements View.OnCli
         settings.setJavaScriptEnabled(true);
         settings.setDefaultTextEncodingName("utf-8");
 
-        mWebView.addJavascriptInterface(new WebViewUtils(mWebView), "androidInterface");
+        mWebView.addJavascriptInterface(new WebViewUtils(this), "androidInterface");
         mWebView.loadUrl("file:///android_asset/test.html");
 
 

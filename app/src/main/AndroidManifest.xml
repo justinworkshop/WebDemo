@@ -33,7 +33,8 @@
 
         <activity
             android:name="com.example.webdemo.keyboard.KeyboardActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
             android:name=".jsinterface.JsInterfaceActivity"
